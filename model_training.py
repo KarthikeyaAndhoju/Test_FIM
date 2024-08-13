@@ -1,19 +1,21 @@
-from data_preprocessing import load_and_preprocess_data
+from data_preprocessing import DataPreprocessor
 from sklearn.linear_model import LinearRegression
-import pandas as pd
+import joblib
 
 class ModelTrainer:
     def __init__(self, filepath):
         self.filepath = filepath
         self.model = LinearRegression()
+        self.preprocessor = DataPreprocessor(filepath)
 
     def train_model(self):
-        # Load and preprocess the data
-        X_train, X_test, y_train, y_test = load_and_preprocess_data(self.filepath)
+        # Use DataPreprocessor to load and preprocess data
+        X_train, X_test, y_train, y_test = self.preprocessor.load_and_preprocess_data()
+        
         print(f"Model trained with score: {score:.2f}")
 
     def save_model(self, filename):
-        import joblib
+        
 
 if __name__ == "__main__":
     filepath = "simple_dataset.csv"
